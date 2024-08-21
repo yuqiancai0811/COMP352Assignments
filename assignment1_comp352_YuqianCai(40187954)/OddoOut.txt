@@ -1,0 +1,56 @@
+trinaryOddonacci(5) = 5
+Time taken: 1583 ns
+linearOddonacci(5) = 5
+Time taken: 1375 ns
+tailRecursiveOddonacci(5) = 5
+Time taken: 3750 ns
+----------------------------------------
+trinaryOddonacci(10) = 105
+Time taken: 5583 ns
+linearOddonacci(10) = 105
+Time taken: 1584 ns
+tailRecursiveOddonacci(10) = 105
+Time taken: 542 ns
+----------------------------------------
+trinaryOddonacci(15) = 2209
+Time taken: 112709 ns
+linearOddonacci(15) = 2209
+Time taken: 1958 ns
+tailRecursiveOddonacci(15) = 2209
+Time taken: 625 ns
+----------------------------------------
+trinaryOddonacci(20) = 46499
+Time taken: 283625 ns
+linearOddonacci(20) = 46499
+Time taken: 3417 ns
+tailRecursiveOddonacci(20) = 46499
+Time taken: 750 ns
+----------------------------------------
+trinaryOddonacci(25) = 978793
+Time taken: 3079333 ns
+linearOddonacci(25) = 978793
+Time taken: 4583 ns
+tailRecursiveOddonacci(25) = 978793
+Time taken: 1125 ns
+----------------------------------------
+trinaryOddonacci(30) = 20603361
+Time taken: 41255584 ns
+linearOddonacci(30) = 20603361
+Time taken: 12125 ns
+tailRecursiveOddonacci(30) = 20603361
+Time taken: 1417 ns
+----------------------------------------
+trinaryOddonacci(35) = 433695873
+Time taken: 845697584 ns
+linearOddonacci(35) = 433695873
+Time taken: 19209 ns
+tailRecursiveOddonacci(35) = 433695873
+Time taken: 4208 ns
+----------------------------------------
+trinaryOddonacci(40) = 9129195487
+Time taken: 17705012834 ns
+linearOddonacci(40) = 9129195487
+Time taken: 72750 ns
+tailRecursiveOddonacci(40) = 9129195487
+Time taken: 5333 ns
+----------------------------------------

@@ -1,0 +1,53 @@
+﻿Programming Assignment1
+Comp 352 Summer 2024 
+
+
+
+1. Pseudo code:
+1. Multiple Oddonacci Calculator:
+Algorithm trinaryOddonacci(n):
+Input: n is the Oddonacci number need  (postive integer value)
+output : is the nth term of the Oddonacci series
+if(n=1 or n= 2 or n= 3) then return 1
+else return trinaryOddonacci(n-1)+ trinaryOddonacci(n-2)+ trinaryOddonacci(n-3)
+
+
+2. Linear Oddonacci Calculator:
+Algorithm linearOddonacci(n):
+Input: n is the Oddonacci number need  (positive integer value)
+output : array of Oddonacci numbers {Oddo(n-2) , Oddo(n−1),Oddo(n)}
+if n = 1 then return {1, 0, 0}
+if n = 2 then return {1, 1, 0}
+if n = 3 then return {1, 1, 1}
+// Base case, first three Oddonacci numbers
+else previous_array {i,  j, k}  =  LinearFibonacci(n − 1)
+ then return {j, k, i+j+k}
+By comparing their runtime performances, the version trinaryOddonacci(n) is much slower than linearOddonacci(n) especially with a large n like 40.
+trinaryOddonacci(40) = 9129195487
+Time taken: 17705012834 ns
+linearOddonacci(40) = 9129195487
+Time taken: 72750 ns
+
+
+
+
+b) why the first algorithm trinaryOddonacci(n) is of exponential complexity:
+We can oberesve that for each time n is larger than 3, the function will return trinaryOddonacci(n-1)+ trinaryOddonacci(n-2)+ trinaryOddonacci(n-3). We can write the time complexity as T(n)=T(n-1)+T(n-2)+T(n-3)-------(3 calls)
+  =T(n-2)+T(n-3)+T(n-4)+T(n-3)+T(n-4)+T(n-5)+T(n-4)+T(n-5)+T(n-6)------(9 calls)
+=......------(3*3*3=27 calls)
+=......------(3*3*3....*3=3^(n-3) calls)
+when n is bigger than 3, each time there will be 3 recursive calls, and each of them also will have 3 recursive calls. Therefore, the total calls become 3*3*3*3….=3^(n-3) and the complexity is exponential as O(3^n).
+ why the second algorithm linearOddonacci(n) is of linear complexity:
+Because it makes a single recursive call per function invocation and directly computes each Oddonacci number without repeated calculations.Each invocation of makes linearOddonacci(n) exactly one recursive call until it reaches the base case.So the time complexity of linearOddonacci(n) is O(n).
+
+
+c) Can a tail-recursive version of Oddonacci calculator be designed?
+Yes, but we need to add more parameters to the function. The time complexity will still O(n).
+Pseudo  code:
+Algorithm tailOddonacci(n, a, b, c):
+Input: n is the nth Oddonacci number need, a is the third previous number, b is the second number,  c is the first previous number of nth Oddonacci number. 
+Output: the nth Oddonacci number
+If n=1 then return a
+If n=2 then return b
+If n=3 then return c
+else return tailOddonacci(n-1,b,c, a+b+c)
