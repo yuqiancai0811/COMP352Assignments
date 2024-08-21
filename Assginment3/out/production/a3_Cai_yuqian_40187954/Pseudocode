@@ -1,0 +1,122 @@
+Assignment 3 comp 352
+Yuqian Cai
+40187954
+
+Pseudo Code:
+
+Class SmarterPriorityQueue:
+    Declare heap: array of Entry
+    Declare size: integer, initially 0
+    Declare minHeap: boolean, initially true
+
+    Class Entry:
+        Declare key: integer
+        Declare value: Object
+        Constructor(key: integer, value: Object):
+            key = key
+            value = value
+
+    Constructor(initialCapacity: integer):
+        heap = new array of Entry[initialCapacity]
+        size = 0
+        minHeap = true
+
+    Method insert(key: integer, value: Object):
+        If size == heap.length:
+            resize()
+        heap[size] = new Entry(key, value)
+        upHeap(size)
+        size++
+
+    Method removeTop():
+        If size == 0:
+            Return null
+        Entry top = heap[0]
+        heap[0] = heap[size - 1]
+        heap[size - 1] = null
+        size--
+        downHeap(0)
+        Return top
+
+    Method top():
+        If size == 0:
+            Return null
+        Return heap[0]
+
+    Method toggle():
+        minHeap = !minHeap //change flag
+        buildHeap()
+
+    Method replaceKey(entry: Entry, newKey: integer):
+        int index = findIndex(entry)
+        If index == -1:
+            Throw new IllegalArgumentException("Entry not found in the heap")
+        int oldKey = heap[index].key
+        heap[index].key = newKey
+        If minHeap:
+            If newKey < oldKey:
+                upHeap(index)
+            Else:
+                downHeap(index)
+        Else: //maxheap
+            If newKey > oldKey:
+                upHeap(index)
+            Else:
+                downHeap(index)
+        Return oldKey
+
+    Method replaceValue(entry: Entry, newValue: Object):
+        int index = findIndex(entry)
+        If index == -1:
+            Throw new IllegalArgumentException("Entry not found in the heap")
+        Object oldValue = heap[index].value
+        heap[index].value = newValue
+        Return oldValue
+
+    Method isEmpty():
+        Return size == 0
+
+    Method size():
+        Return size
+
+    Method state():
+        Return minHeap ? "Min-Heap" : "Max-Heap"
+
+    // Private Methods
+    Method buildHeap():
+        For i = (size / 2) - 1 down to 0:
+            downHeap(i)  //from last non leaf node to heapify
+
+    Method downHeap(index: integer):
+        While 2 * index + 1 < size:
+            int childIndex = 2 * index + 1 // left child
+            If childIndex + 1 < size and compare(heap[childIndex + 1], heap[childIndex]):
+                childIndex++
+            If !(compare(heap[index], heap[childIndex])):
+                Break
+            swap(index, childIndex)
+            index = childIndex
+
+    Method upHeap(index: integer):
+        While index > 0 and compare(heap[parent(index)], heap[index]):
+            swap(parent(index), index)
+            index = parent(index)
+
+    Method parent(index: integer):
+        Return (index - 1) / 2
+
+    Method swap(i: integer, j: integer):
+        Entry temp = heap[i]
+        heap[i] = heap[j]
+        heap[j] = temp
+
+    Method resize():
+        Entry[] newHeap = new array of Entry[heap.length * 2]
+        Copy heap to newHeap
+        heap = newHeap
+
+    Method findIndex(entry: Entry):
+        For i = 0 to size - 1:
+            If heap[i] == entry:
+                Return i
+        Return -1

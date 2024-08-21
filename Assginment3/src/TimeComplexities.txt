@@ -1,0 +1,18 @@
+Tight Big-O Time Complexities
+
+toggle():
+Time Complexity: O(n)
+Explanation: Toggling involves rebuilding the heap, which requires heapifying all non-leaf nodes. This takes linear time relative to the number of elements in the heap.
+
+remove(e) (Assuming this is the same as removeTop()):
+Time Complexity: O(log n)
+Explanation: Removing the top element requires replacing it with the last element and then performing downHeap, which takes logarithmic time.
+
+replaceKey(e, k):
+Time Complexity: O(n) for finding the entry, O(log n) for adjusting the heap
+Explanation: Finding the entry requires scanning the heap, which takes linear time. Adjusting the heap with upHeap or downHeap takes logarithmic time.
+
+replaceValue(e, v):
+Time Complexity: O(n) for finding the entry, O(1) for replacing the value
+Explanation: Finding the entry requires scanning the heap, which takes linear time. Replacing the value itself is a constant time operation.
+
