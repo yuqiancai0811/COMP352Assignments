@@ -1,0 +1,174 @@
+﻿Programming assignment 2 
+COMP 352 Summer 2024
+
+
+
+
+1. Pseudo code for creating a stack by expandable array:
+Class Stack:
+    t is the index of the top element
+    capacity is the total capacity of the stack array
+    Object array is the expandable array to hold elements
+  
+    Function size():
+        return t + 1
+  
+    Function stack():
+        array = create_array(1)  // Initialize an array with capacity 1
+        t ← -1                   // Initialize t to -1 to indicate the stack is empty
+   
+    Function push(value):
+        if t = capacity - 1:
+            resize(2 * capacity)  // Double the capacity
+        t ← t + 1
+        array[t] = value
+    
+    Function pop():
+        if isEmpty():
+            return null          // Stack underflow condition
+        value = array[t]
+        t ← t - 1
+        if t > 0    return the value
+
+
+    Function peek():
+        if isEmpty():
+            return null          // Stack is empty
+      else  return array[t]
+
+
+    Function isEmpty():
+        return t = -1
+
+
+    Function resize(new_capacity):
+        new_array = create_array(new_capacity)
+        for i from 0 to t:
+            new_array[i] = array[i]
+        array = new_array
+        capacity = new_capacity
+
+
+    Function create_array(size):
+    return a new array with the given size
+
+
+Pseudo code for Arithmetic Calculator by using the custom stack:
+
+
+    Function EvaluateExpression(expression):
+    OperandStack = new Stack()       // Stack to store operands
+    OperandStack.initialize()    // Initialize OperandStack
+    OperatorStack = new Stack()      // Stack to store operators
+    OperatorStack.initialize()   // Initialize OperatorStack
+    
+    i = 0
+    while i < length(expression):
+        //Handle Digits
+        if is_digit(expression[i]):
+            num = 0
+            while i < length(expression) and is_digit(expression[i]):
+                num = num * 10 + to_integer(expression[i])
+                i = i + 1
+            OperandStack.push(num)
+            i = i - 1
+          //Handle Opening Parenthesis:
+        Else if expression[i] == '(':
+            OperatorStack.push('(')
+        //Handle closing Parathesis:
+        Else if expression[i] == ')':
+            while OperatorStack.peek() != '(':
+                operator = OperatorStack.pop()
+                operand2 = OperandStack.pop()
+                operand1 = OperandStack.pop()
+                result = ApplyOperator(operator, operand1, operand2)
+                OperandStack.push(result)
+            OperatorStack.pop()  // Remove '('
+        
+    //Handle operators    
+    elif is_operator(expression[i]):
+            while (not OperatorStack.isEmpty() and
+                   Precedence(OperatorStack.peek()) >= Precedence(expression[i])):
+                operator = OperatorStack.pop()
+                operand2 = OperandStack.pop()
+                operand1 = OperandStack.pop()
+                result = ApplyOperator(operator, operand1, operand2)
+                OperandStack.push(result)
+            OperatorStack.push(expression[i])
+        
+        i = i + 1
+    
+    while not OperatorStack.isEmpty():
+        operator = OperatorStack.pop()
+        operand2 = OperandStack.pop()
+        operand1 = OperandStack.pop()
+        result = ApplyOperator(operator, operand1, operand2)
+        OperandStack.push(result)
+    
+    return OperandStack.pop()
+
+
+
+
+    Function Precedence(operator):
+    if operator == '^':
+        return 3
+    elif operator == '*' or operator == '/':
+        return 2
+    elif operator == '+' or operator == '-':
+        return 1
+    elif operator == '>' or operator == '>=' or operator == '<' or operator == '<=':
+        return 0
+    elif operator == '==' or operator == '!=':
+        return -1
+    else:
+        return -2  // For parentheses and invalid operators
+
+
+
+
+    Function ApplyOperator(operator, operand1, operand2):
+    if operator == '^':
+        return power(operand1, operand2)
+    elif operator == '*':
+        return operand1 * operand2
+    elif operator == '/':
+        return operand1 / operand2
+    elif operator == '+':
+        return operand1 + operand2
+    elif operator == '-':
+        return operand1 - operand2
+    elif operator == '>':
+        return operand1 > operand2
+    elif operator == '>=':
+        return operand1 >= operand2
+    elif operator == '<':
+        return operand1 < operand2
+    elif operator == '<=':
+        return operand1 <= operand2
+    elif operator == '==':
+        return operand1 == operand2
+    elif operator == '!=':
+        return operand1 != operand2
+    else:
+        return 0  // Invalid operator
+
+
+    Function is_digit(character):
+    return '0' <= character <= '9'
+
+
+    Function to_integer(character):
+    return integer value of character
+
+
+    Function is_operator(character):
+    return character in ['+', '-', '*', '/', '^', '>', '>=', '<', '<=', '==', '!=']
+
+
+b)time complexity: n is the length of the expression and the time complexity will be O(n)
+because handling each digit, operators, and parenthesis need the same constant time.
+The time complexity will only be based on the total number of them.
+Space complexity: The space complexity will also be O(n), as having 2 stacks,
+the space needed will be only for all operands and operators to these stacks,
+then will always be less than O(n).
